@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head.ejs') %>
+  <body>
+    <%- include('./partials/header.ejs') %>
+    <div class="greetings">
+      <h2 class="greetings-text">
+        HEY <%= user.email %> ! Whats on your mind ..
+      </h2>
+      <a href="#create-blog">Create a Leaf</a>
+      <a href="#user-blog-list">Your Leafs</a>
+      <p>
+        Tell the world what you want to say.<br />
+        Create your own Leaf and share it with your friends now
+      </p>
+    </div>
+    <div class="create-blog-box" id="create-blog">
+      <form method="POST" action="/profile/blog/create">
+        <h2>Create your own blog</h2>
+        <label for="title">Title: </label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          value="<%= updateBlog.title %>"
+        />
+        <label for="content">Content: </label>
+        <textarea name="content" id="content">
+<%= updateBlog.content %></textarea
+        >
+        <input type="submit" value="Post" id="blog-submit-btn" />
+      </form>
+      <% if(msg){ %>
+      <p id="message"><%= msg %></p>
+      <% } %>
+    </div>
+
+    <div class="user-blog-list" id="user-blog-list">
+      <h3>Your Leafs</h3>
+      <% if(blogs.length>0){ %> <% blogs.forEach( blog => { %>
+      <div>
+        <a href="/<%= blog.id %>" class="blog-title"><%= blog.title %></a>
+        <form
+          id="<%= blog.id %>"
+          method="post"
+          action="/profile/blog/delete/<%= blog.id %>"
+        ></form>
+        <form
+          id="<%= blog.id %>-update"
+          method="post"
+          action="/profile/blog/update/<%= blog.id %>"
+        ></form>
+        <i
+          class="fa fa-trash"
+          aria-hidden="true"
+          onclick="document.getElementById('<%= blog.id %>').submit();"
+        ></i>
+        <i
+          class="fa fa-pencil"
+          aria-hidden="true"
+          onclick="document.getElementById('<%= blog.id %>-update').submit();"
+        ></i>
+      </div>
+      <% }) }%> <% if(blogs.length==0){ %>
+      <p>No Leafs yet.</p>
+      <% } %>
+    </div>
+    <%- include('./partials/footer.ejs') %>
+  </body>
+</html>
