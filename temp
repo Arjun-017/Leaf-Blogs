@@ -1,4 +1,0 @@
-<% blogs.map( blog => { %>
-      <h3><%= blog.title %></h3>
-      <p><%= blog.content %></p>
-      <% }) %>

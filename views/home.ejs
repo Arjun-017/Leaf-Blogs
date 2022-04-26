@@ -15,10 +15,16 @@
         <a href="#home-blog-list">Read Blogs</a>
       </div>
     </div>
-
     <div class="home-blog-list" id="home-blog-list">
       <h2>Latest Leafs</h2>
-      <% blogs.forEach( blog => { %>
+      <div id="home-blog-search">
+        <h3>Search for blogs ..</h3>
+        <div>
+          <input type="text" name="search" id="search" />
+          <button id="search-button">Search</button>
+        </div>
+      </div>
+      <% var docs = blogs %> <% blogs.forEach( blog => { %>
       <div>
         <h3><%= blog.title %></h3>
         <br />
@@ -28,5 +34,27 @@
     </div>
 
     <%- include('./partials/footer.ejs') %>
+    <script>
+      var btn = document.getElementById("menu-list-btn");
+      var menu = document.getElementById("menu-list-home");
+      var visible = false;
+      var searchbtn = document.getElementById("search-button");
+      var search = document.getElementById("search");
+      let docs = "<%=docs%>";
+      console.log(docs);
+      btn.addEventListener("click", () => {
+        if (visible) {
+          menu.classList.remove("menu-move");
+          visible = false;
+        } else {
+          menu.classList.add("menu-move");
+          visible = true;
+        }
+        console.log(visible);
+      });
+      searchbtn.addEventListener("click", (e) => {
+        console.log(blogs);
+      });
+    </script>
   </body>
 </html>

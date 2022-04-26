@@ -32,7 +32,7 @@ const PORT = process.env.PORT || 5000;
 
 //rendering views
 app.get("/", async (req, res) => {
-  const blogs = await Blog.find({});
+  const blogs = await Blog.find({}).sort({ _id: -1 }).limit(10);
   res.render("home", { blogs });
 });
 
@@ -40,7 +40,7 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
-app.get("/:id", auth, async (req, res) => {
+app.get("/:id", async (req, res) => {
   const blog = await Blog.findById(req.params.id);
   res.render("blog", { blog });
 });
