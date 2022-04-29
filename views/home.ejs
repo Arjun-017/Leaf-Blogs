@@ -42,15 +42,16 @@
       var search = document.getElementById("search");
       let docs = "<%=docs%>";
       console.log(docs);
-      btn.addEventListener("click", () => {
+      btn.addEventListener("touch", () => {
         if (visible) {
+          console.log(visible);
           menu.classList.remove("menu-move");
           visible = false;
         } else {
+          console.log(visible);
           menu.classList.add("menu-move");
           visible = true;
         }
-        console.log(visible);
       });
       searchbtn.addEventListener("click", (e) => {
         console.log(blogs);
